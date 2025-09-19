@@ -10,7 +10,7 @@ const createMovie = async(req, res) => {
             releaseYear: req.body.releaseYear,
             rating: req.body.rating,
             filePath: req.body.filePath,
-            thumbnail: req.body.thumbnail,
+            poster: req.body.poster,
             createdAt: new Date()
         };
         const result = await Movie.createMovie(movie);

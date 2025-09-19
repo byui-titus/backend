@@ -8,8 +8,7 @@
   "host": "backend-xhkx.onrender.com",
   "basePath": "/",
   "schemes": [
-    "https",
-    "http"
+    "https"
   ],
   "paths": {
     "/": {
@@ -60,7 +59,7 @@
                 "filePath": {
                   "example": "any"
                 },
-                "thumbnail": {
+                "poster": {
                   "example": "any"
                 }
               }
