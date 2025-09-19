@@ -17,15 +17,15 @@ async function getAllMovies() {
 }
 
 async function getMovieById(id) {
-    return await getCollection().findOne({ _id: ObjectId(id) });
+    return await getCollection().findOne({ _id: new ObjectId(id) });
 }
 
 async function updateMovie(id, data) {
-    return await getCollection().updateOne({ _id: ObjectId(id) }, { $set: data });
+    return await getCollection().updateOne({ _id: new ObjectId(id) }, { $set: data });
 }
 
 async function deleteMovie(id) {
-    return await getCollection().deleteOne({ _id: ObjectId(id) });
+    return await getCollection().deleteOne({ _id: new ObjectId(id) });
 }
 
 // Streaming
