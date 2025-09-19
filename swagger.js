@@ -5,8 +5,8 @@ const doc = {
         title: 'movie Api',
         description: 'movies Api'
     },
-    host: 'localhost:5000',
-    schemes: ['https', 'http']
+    host: 'backend-xhkx.onrender.com',
+    schemes: ['https']
 };
 
 const outputFile = './swagger.json';
