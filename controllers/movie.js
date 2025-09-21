@@ -11,6 +11,7 @@ const createMovie = async(req, res) => {
             rating: req.body.rating,
             filePath: req.body.filePath,
             poster: req.body.poster,
+            vj: req.body.vj,
             createdAt: new Date()
         };
         const result = await Movie.createMovie(movie);
@@ -43,8 +44,19 @@ const getMovie = async(req, res) => {
 
 // UPDATE
 const updateMovie = async(req, res) => {
+    const movie = {
+        title: req.body.title,
+        description: req.body.description,
+        genre: req.body.genre,
+        releaseYear: req.body.releaseYear,
+        rating: req.body.rating,
+        filePath: req.body.filePath,
+        poster: req.body.poster,
+        vj: req.body.vj,
+        createdAt: new Date()
+    };
     try {
-        const result = await Movie.updateMovie(req.params.id, req.body);
+        const result = await Movie.updateMovie(req.params.id, movie);
         if (result.modifiedCount === 0) {
             return res.status(404).json({ error: "Movie not found" });
         }
