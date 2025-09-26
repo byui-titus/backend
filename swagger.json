@@ -128,28 +128,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "title": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                },
                 "genre": {
-                  "example": "any"
-                },
-                "releaseYear": {
-                  "example": "any"
-                },
-                "rating": {
-                  "example": "any"
-                },
-                "filePath": {
-                  "example": "any"
-                },
-                "poster": {
-                  "example": "any"
-                },
-                "vj": {
                   "example": "any"
                 }
               }
