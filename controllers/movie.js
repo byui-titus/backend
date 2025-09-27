@@ -45,7 +45,7 @@ const getMovie = async(req, res) => {
 // UPDATE
 const updateMovie = async(req, res) => {
     const movie = {
-        genre: req.body.genre,
+        filePath: req.body.filePath
     };
     try {
         const result = await Movie.updateMovie(req.params.id, movie);

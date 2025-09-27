@@ -128,7 +128,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "genre": {
+                "filePath": {
                   "example": "any"
                 }
               }
