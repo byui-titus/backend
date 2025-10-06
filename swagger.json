@@ -128,7 +128,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "filePath": {
+                "poster": {
                   "example": "any"
                 }
               }
