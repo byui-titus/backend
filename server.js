@@ -4,6 +4,9 @@ const mongodb = require('./data/database');
 const bodyParser = require('body-parser');
 
 const route = require('./routes/index.js');
+//import authRoutes from "./routes/authRoutes.js";
+const createAdmin = require("./utils/createAdmin.js");
+
 
 
 const app = express();
@@ -21,8 +24,16 @@ app.use((req, res, next) => {
     next();
 });
 
+const User = require("./models/User.js");
+app.locals.userModel = new User(mongodb);
+
 app.use('/', route)
 
+
+
+
+// Create admin user if not exists
+createAdmin(mongodb);
 
 
 mongodb.initDb((err) => {
