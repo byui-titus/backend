@@ -5,8 +5,8 @@ const movieController = require('../controllers/movie');
 const { authMiddleware } = require('../middleware/authMiddleware');
 
 router.post('/', authMiddleware, movieController.createMovie);
-router.get('/', authMiddleware, movieController.getMovies);
-router.get('/:id', authMiddleware, movieController.getMovie);
+router.get('/', movieController.getMovies);
+router.get('/:id', movieController.getMovie);
 router.put('/:id', authMiddleware, movieController.updateMovie);
 router.delete('/:id', authMiddleware, movieController.deleteMovie);
 
