@@ -22,43 +22,35 @@ app.use((req, res, next) => {
 
 app.use('/', route)
 
-
-
-mongodb.initDb((err) => {
+mongodb.initDb(async(err) => {
     if (err) {
         console.log(err);
     } else {
-        mongodb.initDb(async(err) => {
-            if (err) {
-                console.log(err);
+        const adminEmail = process.env.ADMIN_EMAIL;
+        const adminPassword = process.env.ADMIN_PASSWORD;
+
+        function getCollection() {
+            return mongodb.getDatabase().db().collection("users");
+        }
+
+        try {
+            const existingAdmin = await getCollection().findOne({ email: adminEmail });
+            if (!existingAdmin) {
+                const hashedPassword = await bcrypt.hash(adminPassword, 10);
+                await getCollection().insertOne({
+                    name: "Admin",
+                    email: adminEmail,
+                    password: hashedPassword,
+                    role: "admin",
+                    isPaid: true,
+                });
+                console.log("✅ Admin user created");
             } else {
-                const adminEmail = process.env.ADMIN_EMAIL;
-                const adminPassword = process.env.ADMIN_PASSWORD;
-
-                function getCollection() {
-                    return mongodb.getDatabase().db().collection("users");
-                }
-
-                try {
-                    const existingAdmin = await getCollection().findOne({ email: adminEmail });
-                    if (!existingAdmin) {
-                        const hashedPassword = await bcrypt.hash(adminPassword, 10);
-                        await getCollection().insertOne({
-                            name: "Admin",
-                            email: adminEmail,
-                            password: hashedPassword,
-                            role: "admin",
-                            isPaid: true,
-                        });
-                        console.log("✅ Admin user created");
-                    } else {
-                        console.log("ℹ️ Admin already exists");
-                    }
-                } catch (error) {
-                    console.error("❌ Error creating admin:", error);
-                }
+                console.log("ℹ️ Admin already exists");
             }
-        });
+        } catch (error) {
+            console.error("❌ Error creating admin:", error);
+        }
         app.listen(port);
         console.log(`Connected to DB and listening on ${port}`);
     }

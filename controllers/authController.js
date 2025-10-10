@@ -2,16 +2,20 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mongodb = require('../data/database');
 
+
+function getCollection() {
+    return mongodb.getDatabase().db().collection("users");
+}
+
 async function register(req, res) {
     try {
-        const db = mongodb.getDb().db();
         const { name, email, password, role } = req.body;
 
-        const existingUser = await db.collection('users').findOne({ email });
+        const existingUser = await getCollection().findOne({ email });
         if (existingUser) return res.status(400).json({ message: 'User already exists' });
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const result = await db.collection('users').insertOne({
+        const result = await getCollection().insertOne({
             name,
             email,
             password: hashedPassword,
@@ -27,10 +31,9 @@ async function register(req, res) {
 
 async function login(req, res) {
     try {
-        const db = mongodb.getDb().db();
         const { email, password } = req.body;
 
-        const user = await db.collection('users').findOne({ email });
+        const user = await getCollection().findOne({ email });
         if (!user) return res.status(404).json({ message: 'User not found' });
 
         const isMatch = await bcrypt.compare(password, user.password);
