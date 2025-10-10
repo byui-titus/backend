@@ -1,4 +1,4 @@
-export async function createAdmin(mongodb) {
+async function createAdmin(mongodb) {
     const userModel = new(await
         import ("../models/User.js")).User(mongodb);
     const adminEmail = process.env.ADMIN_EMAIL;
