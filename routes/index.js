@@ -1,9 +1,11 @@
 const router = require('express').Router();
 
 router.use('/', require('./swagger'));
+const authRoutes = require('./authRoutes');
+
+router.use('/auth', authRoutes);
 
 router.use('/Movie', require('./routes'));
-router.use('/auth', require('./authRoutes'));
 
 router.get('/', (req, res) => {
 
