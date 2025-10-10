@@ -6,7 +6,7 @@ const authRoutes = require('./authRoutes');
 router.use('/auth', authRoutes);
 
 // Movie routes
-const movieRoutes = require('./movieRoutes'); // ✅ make sure you have this file
+const movieRoutes = require('./routes');
 router.use('/Movie', movieRoutes);
 
 router.get('/', (req, res) => {
