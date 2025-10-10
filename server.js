@@ -36,7 +36,7 @@ mongodb.initDb((err) => {
                 const adminPassword = process.env.ADMIN_PASSWORD;
 
                 function getCollection() {
-                    return mongodb.getDatabase().db().collection("movie_app");
+                    return mongodb.getDatabase().db().collection("users");
                 }
 
                 try {
