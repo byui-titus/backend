@@ -1,10 +1,11 @@
-const { getDb } = require('../data/database');
+const mongodb = require('./data/database');
 const bcrypt = require('bcrypt');
 
-const collectionName = 'users';
+function getCollection() {
+    return mongodb.getDatabase().db().collection("movie_app");
+}
 
 async function createUser(userData) {
-    const db = getDb();
     const users = db.collection(collectionName);
     const hashedPassword = await bcrypt.hash(userData.password, 10);
     const user = {...userData, password: hashedPassword };
@@ -13,8 +14,7 @@ async function createUser(userData) {
 }
 
 async function findByEmail(email) {
-    const db = getDb();
-    return await db.collection(collectionName).findOne({ email });
+    return await getCollection().findOne({ email });
 }
 
 module.exports = { createUser, findByEmail };
